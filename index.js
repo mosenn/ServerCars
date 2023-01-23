@@ -2,16 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-// const { static } = require("./path/path");
+const { static } = require("./path/path");
 const app = express();
 
 app.use(bodyParser.json());
+// cors
 app.use(cors());
 const carRoute = require("./router/car");
-// const  page404  = require("./router/404");
+const page404 = require("./router/404");
+
 // routes
 app.use("/cars", carRoute);
-// cors
+app.use(page404);
 
 mongoose.set("strictQuery", false);
 
@@ -25,13 +27,13 @@ mongoose
   .catch((err) => console.log("someting wrong", err));
 
 // acesse
+static(app);
 
 // view ejs
 app.set("view engine", "ejs");
 app.set("views", "view");
-// routes
 
-// app.use(page404);
+
 
 const port = process.env.PORT || 3002;
 app.listen(port, () => {
