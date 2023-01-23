@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(bodyParser.json());
 const carRoute = require("./router/car");
-const  page404  = require("./router/404");
+// const  page404  = require("./router/404");
 app.use(cors());
 mongoose.set("strictQuery", false);
 
@@ -28,7 +28,7 @@ app.set("view engine", "ejs");
 app.set("views", "view");
 // routes
 app.use("/cars", carRoute);
-app.use(page404);
+// app.use(page404);
 
 // local server if you want see result in your local . Comment out
 // const port = process.env.PORT || 3002;
