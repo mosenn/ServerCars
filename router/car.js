@@ -1,9 +1,5 @@
 const { carsModel } = require("../model/carSchma");
-const { static } = require("../path/path");
 const express = require("express");
-const app = express();
-
-static(app);
 const router = express.Router();
 
 router.use(express.json());
