@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(bodyParser.json());
 const carRoute = require("./router/car");
-const { page404 } = require("./router/404");
+const  page404  = require("./router/404");
 app.use(cors());
 mongoose.set("strictQuery", false);
 
