@@ -12,6 +12,7 @@
       "dest": "index.js"
     },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "status": 404, "dest": "/view/404page.ejs" }
+    { "src": "/(.*)", "status": 404, "dest": "/view/404page.ejs" },
+    { "src": "/[^.]+", "dest": "/", "status": 200 }
   ]
 }
