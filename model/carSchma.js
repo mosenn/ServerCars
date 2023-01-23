@@ -1,11 +1,14 @@
-const { string, required } = require("joi");
 const mongoose = require("mongoose");
-const Joi = require("joi");
 const carModel = mongoose.model(
   "cars",
   new mongoose.Schema({
     id: {
+      type: Number,
+      required: true,
+    },
+    sort: {
       type: String,
+      required: true,
     },
     name: {
       type: String,
@@ -47,12 +50,10 @@ const carModel = mongoose.model(
     views: {
       type: Object,
       required: true,
-  
     },
     reviews: {
       type: Object,
       required: true,
-
     },
   })
 );

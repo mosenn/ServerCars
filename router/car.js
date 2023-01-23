@@ -5,7 +5,8 @@ const router = express.Router();
 router.use(express.json());
 
 router.get("/", async (req, res) => {
-  const data = await carsModel.find();
+  // sort perfect working with number - id is number in mongodb
+  const data = await carsModel.find().sort({ id: 1 });
   res.send(data);
 });
 
@@ -17,7 +18,12 @@ router.get("/:id", async (req, res) => {
     }
     res.send(data);
   } catch (err) {
-    res.status(404).send("your id length most be 24");
+    res.status(404).send(`
+      برای گرفتن با ایدی  
+      _id این ایدی رو نیاز هست داخل ادرس مروگر بزارید 
+   ایدی زیر  رو تست کنید 
+   63cec5a551274c1e84832d9d
+    `);
   }
 });
 
@@ -26,6 +32,7 @@ router.post("/", async (req, res) => {
   try {
     let newCars = new carsModel({
       name: req.body.name,
+      sort: req.body.sort,
       typeCar: req.body.typeCar,
       fuel: req.body.fuel,
       capacity: req.body.capacity,
@@ -42,7 +49,9 @@ router.post("/", async (req, res) => {
       (items) => items.name === req.body.name
     );
     if (findName) {
-      res.status(404).send("we have this name chose other name");
+      res.status(404).send(`این اسمی که برای کی
+      name 
+      گذاشتید داخل دیتابیس هست یک اسم دیگه انتخاب کنید`);
       return null;
     }
     newCars = await newCars.save();
@@ -55,7 +64,12 @@ router.post("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const data = await carsModel.findByIdAndDelete(req.params.id);
   if (!data) {
-    return res.status(404).send("this id is worng");
+    return res.status(404).send(`
+      برای پاک کردن 
+      _id این ایدی رو نیاز هست داخل ادرس مروگر بزارید 
+ ایدی زیر  رو تست کنید 
+ 63cec5a551274c1e84832d9d
+  `);
   }
   res.send(data);
 });
@@ -68,6 +82,7 @@ router.put("/:id", async (req, res) => {
       req.params.id,
       {
         name: req.body.name,
+        sort: req.body.sort,
         typeCar: req.body.typeCar,
         fav: req.body.fav,
         price: req.body.price,
@@ -78,25 +93,44 @@ router.put("/:id", async (req, res) => {
       }
     );
     if (
+      !req.body.sort ||
       !req.body.name ||
       !req.body.typeCar ||
       !req.body.fav ||
       !req.body.price ||
       !req.body.caption
     ) {
-      return res.status(400).send(`you need set body: "name:String" , 
-      "typeCar":String , "fav:Boolean" , "price:Number" , "caption:String"`);
+      return res.status(400).send(`
+      برای اپدیت کردن مثل مثال زیر عمل کنید
+      ایدی رو داخل ادرس فراموش نکنید بزارید
+      _id
+     { "name":"test" , 
+      "sort":"popularCar",
+      "typeCar":"bmw2012" , "fav":"true" , "price":200 , "caption":"lorem lorem" }`);
     }
 
     if (!data) {
-      return res
-        .status(404)
-        .send("someting worng check id and key-values");
+      return res.status(400).send(`
+      برای اپدیت کردن مثل مثال زیر عمل کنید
+      ایدی رو داخل ادرس فراموش نکنید بزارید
+      _id
+     { "name":"test" , 
+      "sort":"popularCar",
+      "typeCar":"bmw2012" , "fav":"true" , "price":200 , "caption":"lorem lorem" }`);
     }
 
     res.send(data);
   } catch (err) {
-    res.send(err.reason.message);
+    err.reason.message;
+    res.send(
+      `
+    برای اپدیت کردن مثل مثال زیر عمل کنید
+    ایدی رو داخل ادرس فراموش نکنید بزارید
+    _id
+   { "name":"test" , 
+    "sort":"popularCar",
+    "typeCar":"bmw2012" , "fav":"true" , "price":200 , "caption":"lorem lorem" } ,   ${err.reason.message}`
+    );
   }
 });
 
