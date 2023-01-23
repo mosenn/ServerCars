@@ -33,7 +33,7 @@ app.set("views", "view");
 
 // app.use(page404);
 
-// const port = process.env.PORT || 3002;
-// app.listen(port, () => {
-//   console.log(`local server is runing at ${port}`);
-// });
+const port = process.env.PORT || 3002;
+app.listen(port, () => {
+  console.log(`local server is runing at ${port}`);
+});
