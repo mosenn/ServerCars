@@ -4,11 +4,14 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 // const { static } = require("./path/path");
 const app = express();
-app.use(cors());
+
 app.use(bodyParser.json());
 const carRoute = require("./router/car");
 // const  page404  = require("./router/404");
-
+// routes
+app.use("/cars", carRoute);
+// cors
+app.use(cors());
 mongoose.set("strictQuery", false);
 
 mongoose
@@ -26,7 +29,7 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", "view");
 // routes
-app.use("/cars", carRoute);
+
 // app.use(page404);
 
 // local server if you want see result in your local . Comment out
