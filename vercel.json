@@ -10,6 +10,8 @@
     {
       "src": "/(.*)",
       "dest": "index.js"
-    }
+    },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "status": 404, "dest": "/404page.ejs" }
   ]
 }
