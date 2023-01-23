@@ -5,13 +5,14 @@ const mongoose = require("mongoose");
 // const { static } = require("./path/path");
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
 const carRoute = require("./router/car");
 // const  page404  = require("./router/404");
 // routes
 app.use("/cars", carRoute);
 // cors
-app.use(cors());
+
 mongoose.set("strictQuery", false);
 
 mongoose
@@ -32,8 +33,7 @@ app.set("views", "view");
 
 // app.use(page404);
 
-// local server if you want see result in your local . Comment out
-// const port = process.env.PORT || 3002;
-// app.listen(port, () => {
-//   console.log(`local server is runing at ${port}`);
-// });
+const port = process.env.PORT || 3002;
+app.listen(port, () => {
+  console.log(`local server is runing at ${port}`);
+});
