@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // const { static } = require("./path/path");
 const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 const carRoute = require("./router/car");
 // const  page404  = require("./router/404");
