@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const { static } = require("./path/path");
+// const { static } = require("./path/path");
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,7 +21,7 @@ mongoose
   .catch((err) => console.log("someting wrong", err));
 
 // acesse
-static(app);
+
 
 // view ejs
 app.set("view engine", "ejs");
