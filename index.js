@@ -3,12 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 // const { static } = require("./path/path");
-
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 const carRoute = require("./router/car");
 // const  page404  = require("./router/404");
-app.use(cors());
+
 mongoose.set("strictQuery", false);
 
 mongoose
@@ -21,7 +21,6 @@ mongoose
   .catch((err) => console.log("someting wrong", err));
 
 // acesse
-
 
 // view ejs
 app.set("view engine", "ejs");
